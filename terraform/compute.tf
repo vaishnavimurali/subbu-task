@@ -16,7 +16,7 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-resource "aws_instance" "jenkins-instance" {
+resource "aws_instance" "kube" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
   instance_type   = "t2.medium"
   key_name        = "${var.keyname}"
@@ -28,7 +28,7 @@ resource "aws_instance" "jenkins-instance" {
 
   associate_public_ip_address = true
   tags = {
-    Name = "aws-jenkins-instance"
+    Name = "aws-kube"
   }
 }
 
@@ -60,5 +60,5 @@ resource "aws_security_group" "sg_allow_ssh_jenkins" {
 }
 
 output "jenkins_ip_address" {
-  value = "${aws_instance.aws-jenkins-instance}"
+  value = "${aws_instance.aws-kube}"
 }
