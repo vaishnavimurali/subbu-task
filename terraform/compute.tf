@@ -16,7 +16,7 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-resource "aws_instance" "aws-cloud9-kube-9fe402f4a14a451499ae574580384cd1" {
+resource "aws_instance" "jenkins-instance" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
   instance_type   = "t2.medium"
   key_name        = "${var.keyname}"
@@ -28,7 +28,7 @@ resource "aws_instance" "aws-cloud9-kube-9fe402f4a14a451499ae574580384cd1" {
 
   associate_public_ip_address = true
   tags = {
-    Name = "aws-cloud9-kube-9fe402f4a14a451499ae574580384cd1"
+    Name = "aws-jenkins-instance"
   }
 }
 
@@ -60,5 +60,5 @@ resource "aws_security_group" "sg_allow_ssh_jenkins" {
 }
 
 output "jenkins_ip_address" {
-  value = "${aws_instance.aws-cloud9-kube-9fe402f4a14a451499ae574580384cd1.public_dns}"
+  value = "${aws_instance.aws-jenkins-instance}"
 }
