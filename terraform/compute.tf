@@ -28,7 +28,7 @@ resource "aws_instance" "jenkins-instance" {
 
   associate_public_ip_address = true
   tags = {
-    Name = "aws-jenkins-instance"
+    Name = "Jenkins-Instance"
   }
 }
 
@@ -60,5 +60,5 @@ resource "aws_security_group" "sg_allow_ssh_jenkins" {
 }
 
 output "jenkins_ip_address" {
-  value = "${aws_instance.aws-jenkins-instance}"
+  value = "${aws_instance.aws-jenkins-instance.public_dns}"
 }
