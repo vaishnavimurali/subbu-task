@@ -16,7 +16,7 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
-resource "aws_instance" "cloud9-instance" {
+resource "aws_instance" "jenkins-instance" {
   ami             = "${data.aws_ami.amazon-linux-2.id}"
   instance_type   = "t2.medium"
   key_name        = "${var.keyname}"
@@ -28,7 +28,7 @@ resource "aws_instance" "cloud9-instance" {
 
   associate_public_ip_address = true
   tags = {
-    Name = "Cloud9-Instance"
+    Name = "Jenkins-Instance"
   }
 }
 
@@ -60,5 +60,5 @@ resource "aws_security_group" "sg_allow_ssh_jenkins" {
 }
 
 output "jenkins_ip_address" {
-  value = "${aws_instance.cloud9-instance.public_dns}"
+  value = "${aws_instance.jenkins-instance.public_dns}"
 }
